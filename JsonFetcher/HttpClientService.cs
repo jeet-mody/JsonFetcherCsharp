@@ -3,20 +3,16 @@ using System.Threading.Tasks;
 
 namespace JsonFetcher
 {
-    public class HttpClientService
+    public static class HttpClientService
     {
-        private readonly HttpClient _httpClient;
-
-        public HttpClientService()
+        public static async Task<string> FetchJsonAsync(string url)
         {
-            _httpClient = new HttpClient();
-        }
-
-        public async Task<string> FetchJsonAsync(string url)
-        {
-            HttpResponseMessage response = await _httpClient.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync();
+            using (HttpClient httpClient = new HttpClient())
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
         }
     }
 }

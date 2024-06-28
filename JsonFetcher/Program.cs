@@ -9,12 +9,11 @@ namespace JsonFetcher
         {
             const string url = "https://jsonplaceholder.typicode.com/todos/1"; // Replace with your JSON URL
 
-            var httpClientService = new HttpClientService();
             var jsonParser = new JsonParser();
 
             try
             {
-                string json = await httpClientService.FetchJsonAsync(url);
+                string json = await HttpClientService.FetchJsonAsync(url);
                 string formattedJson = jsonParser.FormatJson(json);
                 Console.WriteLine(formattedJson);
             }
